@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>application.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+
+    <!--<bean id="drebedengiAnalyzer" class="ru.mail.maxkr.analyzer.DrebedengiAnalyzer">-->
+        <!--<property name="converter" ref="financialOperationCreator" />-->
+        <!--<property name="csvReader" ref="csvReader" />-->
+        <!--<property name="categories" ref="categories" />-->
+        <!--<property name="moneyPlaces" ref="moneyPlaces" />-->
+    <!--</bean>-->
+
+    <bean id="dateParser" class="ru.mail.maxkr.util.dateparser.impl.DefaultDateParser" />
+
+    <bean id="financialOperationCreator" class="ru.mail.maxkr.converter.StringArrayToFinancialOperationConverter"
+          scope="prototype">
+        <property name="dateParser" ref="dateParser" />
+        <property name="entryManager" ref="entryManager" />
+    </bean>
+
+    <bean id="csvReader" class="ru.mail.maxkr.csvreader.CSVReader">
+        <constructor-arg value="${csv.file.source}" />
+        <constructor-arg value="${csv.file.delimiter}" />
+    </bean>
+
+    <bean id="entryManager" class="ru.mail.maxkr.entity.EntryManager">
+        <property name="categories" ref="categories" />
+        <property name="moneyPlaces" ref="moneyPlaces" />
+    </bean>
+
+    <import resource="classpath:spring/entry-config.xml" />
+    <import resource="classpath:spring/expenses-categories-config.xml" />
+    <import resource="classpath:spring/profit-categories-config.xml" />
+    <import resource="classpath:spring/money-places-config.xml" />
+
+</beans>

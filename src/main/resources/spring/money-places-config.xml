@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myWallet" class="ru.mail.maxkr.entity.MoneyPlace">
+          <property name="name" value="Мой кошелек" />
+    </bean>
+
+    <bean id="bufferZone" class="ru.mail.maxkr.entity.MoneyPlace">
+        <property name="name" value="Буфферная зона" />
+    </bean>
+
+    <bean id="bankAccount" class="ru.mail.maxkr.entity.MoneyPlace">
+        <property name="name" value="Счёт в банке" />
+    </bean>
+
+    <bean id="universalCard" class="ru.mail.maxkr.entity.MoneyPlace">
+        <property name="name" value="Универсальная" />
+    </bean>
+
+    <bean id="internetCard" class="ru.mail.maxkr.entity.MoneyPlace">
+        <property name="name" value="Интернет-карта" />
+    </bean>
+
+    <bean id="ppAccount" class="ru.mail.maxkr.entity.MoneyPlace">
+        <property name="name" value="ПП Счет" />
+    </bean>
+
+</beans>

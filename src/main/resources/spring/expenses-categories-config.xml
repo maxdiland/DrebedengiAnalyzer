@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="noCategory" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Без категории" />
+    </bean>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+    <bean id="foodCategory" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Еда" />
+        <property name="subcategories">
+            <list>
+                <ref bean="productsSub" />
+                <ref bean="eatOutSub" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="productsSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Продукты" />
+        <property name="parentCategory" ref="foodCategory" />
+    </bean>
+
+    <bean id="eatOutSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Обеды, перекусы" />
+        <property name="parentCategory" ref="foodCategory" />
+    </bean>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+    <bean id="lifeOutlayCategory" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Траты на жизнь" />
+        <property name="subcategories">
+            <list>
+                <ref bean="driveWaySub" />
+                <ref bean="internetAndCommunicationsSub" />
+                <ref bean="clothesSub" />
+                <ref bean="giftsSub" />
+                <ref bean="restSub" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="driveWaySub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Проезд" />
+        <property name="parentCategory" ref="lifeOutlayCategory" />
+    </bean>
+
+    <bean id="internetAndCommunicationsSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Интернет, связь" />
+        <property name="parentCategory" ref="lifeOutlayCategory" />
+    </bean>
+
+    <bean id="clothesSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Одежда" />
+        <property name="parentCategory" ref="lifeOutlayCategory" />
+    </bean>
+
+    <bean id="giftsSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Подарки" />
+        <property name="parentCategory" ref="lifeOutlayCategory" />
+    </bean>
+
+    <bean id="restSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Отдых" />
+        <property name="parentCategory" ref="lifeOutlayCategory" />
+    </bean>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+    <bean id="homeAndFamilyCategory" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Дом, семья" />
+        <property name="subcategories">
+            <list>
+                <ref bean="householdGoodsSub" />
+                <ref bean="utilitesPaySub" />
+                <ref bean="childrenSub" />
+                <ref bean="parentsSub" />
+                <ref bean="apartmentRentSub" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="householdGoodsSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Хозтовары" />
+        <property name="parentCategory" ref="homeAndFamilyCategory" />
+    </bean>
+
+    <bean id="utilitesPaySub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Квартплата" />
+        <property name="parentCategory" ref="homeAndFamilyCategory" />
+    </bean>
+
+    <bean id="childrenSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Дети" />
+        <property name="parentCategory" ref="homeAndFamilyCategory" />
+    </bean>
+
+    <bean id="parentsSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Родителям" />
+        <property name="parentCategory" ref="homeAndFamilyCategory" />
+    </bean>
+
+    <bean id="apartmentRentSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Съем квартиры" />
+        <property name="parentCategory" ref="homeAndFamilyCategory" />
+    </bean>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+    <bean id="healthAndBeautyCategory" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Здоровье, красота" />
+        <property name="subcategories">
+            <list>
+                <ref bean="pharmacyAndDrugsSub" />
+                <ref bean="treatmentSub" />
+                <ref bean="sportSub" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="pharmacyAndDrugsSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Аптека, препараты" />
+        <property name="parentCategory" ref="healthAndBeautyCategory" />
+    </bean>
+
+    <bean id="treatmentSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Лечение" />
+        <property name="parentCategory" ref="healthAndBeautyCategory" />
+    </bean>
+
+    <bean id="sportSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Спорт" />
+        <property name="parentCategory" ref="healthAndBeautyCategory" />
+    </bean>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+    <bean id="bicycleCategory" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Велосипед" />
+        <property name="subcategories">
+            <list>
+                <ref bean="bikeServiceSub" />
+                <ref bean="bikePartsSub" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="bikeServiceSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Обслуживание" />
+        <property name="parentCategory" ref="bicycleCategory" />
+    </bean>
+
+    <bean id="bikePartsSub" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Запчасти" />
+        <property name="parentCategory" ref="bicycleCategory" />
+    </bean>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+    <bean id="electronicDevicesCategory" class="ru.mail.maxkr.entity.Category">
+        <property name="name" value="Электроника" />
+    </bean>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+</beans>

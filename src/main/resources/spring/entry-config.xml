@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:set id="categories">
+        <!-- expense categories -->
+        <ref bean="noCategory" />
+        <ref bean="foodCategory" />
+        <ref bean="lifeOutlayCategory" />
+        <ref bean="homeAndFamilyCategory" />
+        <ref bean="healthAndBeautyCategory" />
+        <ref bean="bicycleCategory" />
+        <ref bean="electronicDevicesCategory" />
+        <!-- profit categories -->
+        <ref bean="interestOnDeposits" />
+        <ref bean="workOnRogaAndKopyta" />
+        <ref bean="otherSources" />
+        <ref bean="flatLeasing" />
+        <ref bean="profitsPP" />
+    </util:set>
+
+    <!--<util:set id="expenseCategories">-->
+        <!--<ref bean="noCategory" />-->
+        <!--<ref bean="foodCategory" />-->
+        <!--<ref bean="lifeOutlayCategory" />-->
+        <!--<ref bean="homeAndFamilyCategory" />-->
+        <!--<ref bean="healthAndBeautyCategory" />-->
+        <!--<ref bean="bicycleCategory" />-->
+        <!--<ref bean="electronicDevicesCategory" />-->
+    <!--</util:set>-->
+
+    <!--<util:set id="profitCategories">-->
+        <!--<ref bean="interestOnDeposits" />-->
+        <!--<ref bean="workOnRogaAndKopyta" />-->
+        <!--<ref bean="otherSources" />-->
+        <!--<ref bean="flatLeasing" />-->
+        <!--<ref bean="profitsPP" />-->
+    <!--</util:set>-->
+
+    <util:set id="moneyPlaces">
+        <ref bean="myWallet" />
+        <ref bean="bufferZone" />
+        <ref bean="bankAccount" />
+        <ref bean="universalCard" />
+        <ref bean="internetCard" />
+        <ref bean="ppAccount" />
+    </util:set>
+
+</beans>
