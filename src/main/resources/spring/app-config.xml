@@ -21,7 +21,7 @@
 
     <bean id="dateParser" class="ru.mail.maxkr.util.dateparser.impl.DefaultDateParser" />
 
-    <bean id="financialOperationCreator" class="ru.mail.maxkr.converter.StringArrayToFinancialOperationConverter"
+    <bean id="financialOperationCreator" class="ru.mail.maxkr.converter.FinancialOperationMapper"
           scope="prototype">
         <property name="dateParser" ref="dateParser" />
         <property name="entryManager" ref="entryManager" />

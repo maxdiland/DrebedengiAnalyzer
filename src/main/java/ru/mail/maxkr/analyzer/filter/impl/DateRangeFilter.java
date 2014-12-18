@@ -15,7 +15,7 @@ public class DateRangeFilter implements Filter {
     }
 
     @Override
-    public boolean isOperationMatches(FinancialOperation operation) {
+    public boolean isFinancialOperationMatches(FinancialOperation operation) {
         long operationTime = operation.getOperationDate().getTime();
         return (operationTime >= from.getTime() && operationTime < till.getTime());
     }

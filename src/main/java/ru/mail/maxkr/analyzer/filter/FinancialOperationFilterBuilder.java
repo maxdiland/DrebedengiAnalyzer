@@ -21,7 +21,7 @@ public class FinancialOperationFilterBuilder {
     public void addFiltrationBySum(final float sum, final Currency currency) {
         Filter filter = new Filter() {
             @Override
-            public boolean isOperationMatches(FinancialOperation operation) {
+            public boolean isFinancialOperationMatches(FinancialOperation operation) {
                 return operation.getSumWithCurrency().getValue() == sum &&
                         operation.getSumWithCurrency().getCurrency() == currency;
 
@@ -34,7 +34,7 @@ public class FinancialOperationFilterBuilder {
         filters.add(
             new Filter() {
                 @Override
-                public boolean isOperationMatches(FinancialOperation operation) {
+                public boolean isFinancialOperationMatches(FinancialOperation operation) {
                     long operationTime = operation.getOperationDate().getTime();
                     return (operationTime >= from.getTime() && operationTime < till.getTime());
                 }
@@ -72,16 +72,22 @@ public class FinancialOperationFilterBuilder {
 
     public Filter build() {
         return new Filter() {
+            private final List<Filter> filterList = new ArrayList<>(filters);
+
             @Override
-            public boolean isOperationMatches(FinancialOperation operation) {
-                for (Filter currentFilter : filters) {
-                    if (!currentFilter.isOperationMatches(operation)) {
+            public boolean isFinancialOperationMatches(FinancialOperation operation) {
+                for (Filter currentFilter : filterList) {
+                    if (!currentFilter.isFinancialOperationMatches(operation)) {
                         return false;
                     }
                 }
                 return true;
             }
         };
+    }
+
+    private void resetBuilder() {
+        filters = new ArrayList<Filter>();
     }
 
 }

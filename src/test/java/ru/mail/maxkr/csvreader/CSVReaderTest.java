@@ -11,23 +11,12 @@ import java.util.Arrays;
  * Date: 30.12.13
  */
 public class CSVReaderTest {
-    CSVReader reader = new CSVReader();
     String csvDelimiter = ";";
-
-    {
-        System.out.println("Something");
-
-    }
-
-    @Before
-    public void prepare() {
-        reader.setCsvDelimiter(csvDelimiter);
-    }
 
     @Test
     public void splitStringTest01() {
         String stringToSplit = "-1900;грн;Мой кошелёк;Буфферная зона;2013-12-01 15:40:03;;";
-        String[] strings = reader.splitString(stringToSplit);
+        String[] strings = CSVReader.splitString(stringToSplit, csvDelimiter);
 
         Assert.assertEquals(6, strings.length);
     }
@@ -37,19 +26,20 @@ public class CSVReaderTest {
         String[] stringArr = {"Hello", "World", "!!!", "=)"};
         String concatenatedString = concatenateStrings(stringArr, csvDelimiter, false);
 
-        String[] strings = reader.splitString(concatenatedString);
+        String[] strings = CSVReader.splitString(concatenatedString, csvDelimiter);
         Assert.assertTrue(Arrays.equals(stringArr, strings));
     }
 
     private String concatenateStrings(String[] strings, String delimiter, boolean addDelimiterAtTheEnd) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < strings.length; i++) {
-            builder.append(strings[i]);
-
-            if (addDelimiterAtTheEnd || i < strings.length - 1) {
-                builder.append(delimiter);
-            }
+        for (String string : strings) {
+            builder.append(string).append(delimiter);
         }
+
+        if (!addDelimiterAtTheEnd) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+
         return builder.toString();
     }
 
