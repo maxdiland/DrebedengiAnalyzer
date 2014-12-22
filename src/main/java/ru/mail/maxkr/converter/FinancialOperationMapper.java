@@ -6,8 +6,9 @@ import ru.mail.maxkr.entity.EntryManager;
 import ru.mail.maxkr.entity.MoneyPlace;
 import ru.mail.maxkr.entity.Currency;
 import ru.mail.maxkr.entity.SumWithCurrency;
-import ru.mail.maxkr.util.dateparser.DateParser;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Date;
  * Date: 20.12.13
  */
 public class FinancialOperationMapper {
-    private DateParser dateParser;
+    private DateFormat dateFormat;
     private EntryManager entryManager;
 
     public FinancialOperation convert(String[] strings) {
@@ -29,7 +30,12 @@ public class FinancialOperationMapper {
             categoryOrMoneyPlace = entryManager.getMoneyPlaceByName(categoryOrMoneyPlaceName);
         }
         MoneyPlace moneyPlace = entryManager.getMoneyPlaceByName(strings[3]);
-        Date date = dateParser.parse(strings[4]);
+        Date date = null;
+        try {
+            date = dateFormat.parse(strings[4]);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
         String description = strings[5];
 
         SumWithCurrency sumWithCurrency = new SumWithCurrency(currency, sum);
@@ -43,19 +49,19 @@ public class FinancialOperationMapper {
         }
     }
 
-    public DateParser getDateParser() {
-        return dateParser;
-    }
-
-    public void setDateParser(DateParser dateParser) {
-        this.dateParser = dateParser;
-    }
-
     public EntryManager getEntryManager() {
         return entryManager;
     }
 
     public void setEntryManager(EntryManager entryManager) {
         this.entryManager = entryManager;
+    }
+
+    public DateFormat getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
     }
 }
