@@ -3,27 +3,27 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="interestOnDeposits" class="ru.mail.maxkr.entity.Category">
+    <bean id="interestOnDeposits" class="com.gmail.maxdiland.entity.Category">
         <property name="name" value="Банковские проценты" />
         <property name="profitable" value="true" />
     </bean>
 
-    <bean id="workOnRogaAndKopyta" class="ru.mail.maxkr.entity.Category">
+    <bean id="workOnRogaAndKopyta" class="com.gmail.maxdiland.entity.Category">
         <property name="name" value="Работа в фирме РогаКопыта" />
         <property name="profitable" value="true" />
     </bean>
 
-    <bean id="otherSources" class="ru.mail.maxkr.entity.Category">
+    <bean id="otherSources" class="com.gmail.maxdiland.entity.Category">
         <property name="name" value="Прочие источники" />
         <property name="profitable" value="true" />
     </bean>
 
-    <bean id="flatLeasing" class="ru.mail.maxkr.entity.Category">
+    <bean id="flatLeasing" class="com.gmail.maxdiland.entity.Category">
         <property name="name" value="Сдача квартиры" />
         <property name="profitable" value="true" />
     </bean>
 
-    <bean id="profitsPP" class="ru.mail.maxkr.entity.Category">
+    <bean id="profitsPP" class="com.gmail.maxdiland.entity.Category">
         <property name="name" value="Доходы ПП" />
         <property name="profitable" value="true" />
     </bean>
