@@ -5,7 +5,7 @@ import com.gmail.maxdiland.entity.SumWithCurrency;
 import com.gmail.maxdiland.entity.Entry;
 import com.gmail.maxdiland.entity.EntryManager;
 import com.gmail.maxdiland.entity.MoneyPlace;
-import com.gmail.maxdiland.entity.Currency;
+import com.gmail.maxdiland.entity.CurrencyEnum;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -19,11 +19,11 @@ public class FinancialOperationMapper {
     private DateFormat dateFormat;
     private EntryManager entryManager;
 
-    public FinancialOperation convert(String[] strings) {
+    public FinancialOperation map(String[] strings) {
         checkParameter(strings);
 
         float sum = Float.parseFloat(strings[0]);
-        Currency currency = Currency.getCurrencyByTextValue( strings[1] );
+        CurrencyEnum currency = CurrencyEnum.getCurrencyByTextValue(strings[1]);
         String categoryOrMoneyPlaceName = strings[2];
         Entry categoryOrMoneyPlace = entryManager.getCategoryByName(categoryOrMoneyPlaceName);
         if (categoryOrMoneyPlace == null) {

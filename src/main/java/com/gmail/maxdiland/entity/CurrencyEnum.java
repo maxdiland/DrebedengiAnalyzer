@@ -1,12 +1,12 @@
 package com.gmail.maxdiland.entity;
 
-public enum Currency {
+public enum CurrencyEnum {
     UAH("грн"),
     USD("USD");
 
     protected String textValue;
 
-    private Currency(String textValue) {
+    private CurrencyEnum(String textValue) {
         this.textValue = textValue;
     }
 
@@ -14,8 +14,8 @@ public enum Currency {
         return textValue;
     }
 
-    public static Currency getCurrencyByTextValue(String textValue) {
-        for (Currency currency : values()) {
+    public static CurrencyEnum getCurrencyByTextValue(String textValue) {
+        for (CurrencyEnum currency : values()) {
             if ( currency.getTextValue().equalsIgnoreCase(textValue) ) {
                 return currency;
             }

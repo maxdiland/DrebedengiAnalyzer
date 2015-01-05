@@ -1,37 +1,54 @@
 package com.gmail.maxdiland.csvreader;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class CSVReader implements Iterator<String[]>, AutoCloseable {
-    private String csvPath;
+    private File csvFile;
     private String csvDelimiter = ","; //Default value
     private Scanner scanner;
 
-    public CSVReader(String csvPath, String delimiter) {
-        this(csvPath);
-        this.csvDelimiter = delimiter;
+    public CSVReader() {}
+
+    public CSVReader(File csvFile, String csvDelimiter) {
+        this.csvDelimiter = csvDelimiter;
+        instantiateScanner(csvFile);
+    }
+
+    public CSVReader(File csvFile) {
+        this.csvFile = csvFile;
+        instantiateScanner(csvFile);
     }
 
     public CSVReader(String csvPath) {
-        this.csvPath = csvPath;
+        this.csvFile = new File(csvPath);
+        instantiateScanner(csvFile);
+    }
+
+    public CSVReader(String csvPath, String delimiter) {
+        this(new File(csvPath), delimiter);
+    }
+
+    public File getCsvFile() {
+        return csvFile;
+    }
+
+    public void setCsvFile(File csvFile) {
+        this.csvFile = csvFile;
         try {
-            scanner = new Scanner(new File(csvPath));
+            scanner = new Scanner(csvFile);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
-    public String getCsvPath() {
-        return csvPath;
-    }
-
-    public void setCsvPath(String csvPath) {
-        this.csvPath = csvPath;
-        scanner = new Scanner(csvPath);
+    private void instantiateScanner(File csvFile) {
+        try {
+            scanner = new Scanner(csvFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getCsvDelimiter() {

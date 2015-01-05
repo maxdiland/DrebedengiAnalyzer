@@ -1,4 +1,4 @@
-package com.gmail.maxdiland.entity.report;
+package com.gmail.maxdiland.report;
 
 /**
  * author: Maxim Diland

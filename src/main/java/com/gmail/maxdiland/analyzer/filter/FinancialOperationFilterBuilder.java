@@ -2,7 +2,7 @@ package com.gmail.maxdiland.analyzer.filter;
 
 import com.gmail.maxdiland.entity.FinancialOperation;
 import com.google.common.annotations.VisibleForTesting;
-import com.gmail.maxdiland.entity.Currency;
+import com.gmail.maxdiland.entity.CurrencyEnum;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,7 +18,7 @@ public class FinancialOperationFilterBuilder {
 //    private Date operationDate;
 //    private String description;
 
-    public void addFiltrationBySum(final float sum, final Currency currency) {
+    public void addFiltrationBySum(final float sum, final CurrencyEnum currency) {
         Filter filter = new Filter() {
             @Override
             public boolean isFinancialOperationMatches(FinancialOperation operation) {

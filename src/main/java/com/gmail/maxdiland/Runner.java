@@ -1,14 +1,15 @@
 package com.gmail.maxdiland;
 
+import com.gmail.maxdiland.consolescanner.SystemInExtendedScanner;
 import com.gmail.maxdiland.entity.FinancialOperation;
-import com.gmail.maxdiland.entity.report.FullReport;
+import com.gmail.maxdiland.report.FullReport;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.gmail.maxdiland.analyzer.filter.FinancialOperationFilterBuilder;
 import com.gmail.maxdiland.mapper.FinancialOperationMapper;
 import com.gmail.maxdiland.csvreader.CSVReader;
-import com.gmail.maxdiland.entity.Category;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -17,17 +18,25 @@ import java.util.*;
 public class Runner {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/app-config.xml");
-        Set<Category> categories = (Set<Category>) applicationContext.getBean("categories");
-//        CSVReader csvReader = (CSVReader) applicationContext.getBean("csvReader");
-        FinancialOperationMapper converter =
-                (FinancialOperationMapper) applicationContext.getBean("financialOperationCreator");
+
+        // CSV-file location request
+        System.out.println("Please, enter full path to CSV-file to be analyzed");
+        SystemInExtendedScanner scanner = (SystemInExtendedScanner) applicationContext.getBean("userInputScanner");
+
+        File csvFileToAnalyze = scanner.getNextExistingFile();
+        CSVReader csvReader = (CSVReader) applicationContext.getBean("csvReader");
+        csvReader.setCsvFile(csvFileToAnalyze);
+
+
+        FinancialOperationMapper mapper =
+                (FinancialOperationMapper) applicationContext.getBean("financialOperationMapper");
 
         List<FinancialOperation> operations = new ArrayList<FinancialOperation>();
 
-        try ( CSVReader csvReader = (CSVReader) applicationContext.getBean("csvReader") ) {
-            while (csvReader.hasNext()) {
-                String[] readData = csvReader.next();
-                FinancialOperation financialOperation = converter.convert(readData);
+        try (CSVReader reader = csvReader) {
+            while (reader.hasNext()) {
+                String[] readData = reader.next();
+                FinancialOperation financialOperation = mapper.map(readData);
                 operations.add(financialOperation);
             }
         }

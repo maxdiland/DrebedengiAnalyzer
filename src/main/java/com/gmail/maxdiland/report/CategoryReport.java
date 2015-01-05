@@ -1,10 +1,10 @@
-package com.gmail.maxdiland.entity.report;
+package com.gmail.maxdiland.report;
 
 import com.gmail.maxdiland.entity.Category;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import com.gmail.maxdiland.entity.CategoryOperation;
-import com.gmail.maxdiland.entity.Currency;
+import com.gmail.maxdiland.entity.CurrencyEnum;
 import static com.gmail.maxdiland.dictionary.Strings.*;
 
 import java.util.*;
@@ -41,7 +41,7 @@ public class CategoryReport {
 
     @Override
     public String toString() {
-        Map<Currency, Double> withSubcategoriesSums = getCategorySumsWithSubcategories();
+        Map<CurrencyEnum, Double> withSubcategoriesSums = getCategorySumsWithSubcategories();
         removeEmptySums( withSubcategoriesSums );
         String stringSums = formSumsString( withSubcategoriesSums );
 
@@ -70,10 +70,10 @@ public class CategoryReport {
         }
         sb.append(CATEGORY_TABLE_HORIZONTAL_LINE);
         //TODO: add using of String.format() to provide pretty category result view
-        Map<Currency, Double> categorySums = getCategorySums(categoryOperations);
+        Map<CurrencyEnum, Double> categorySums = getCategorySums(categoryOperations);
         removeEmptySums( categorySums );
 
-        for (Currency currency : Currency.values()) {
+        for (CurrencyEnum currency : CurrencyEnum.values()) {
             Double currencySum = categorySums.get(currency);
             if (currencySum != null) {
                 sb.append(
@@ -102,7 +102,7 @@ public class CategoryReport {
         return sb.toString();
     }
 
-    private String formSumsString(Map<Currency, Double> sums) {
+    private String formSumsString(Map<CurrencyEnum, Double> sums) {
         if (MapUtils.isEmpty(sums)) {
             return "";
         }
@@ -110,7 +110,7 @@ public class CategoryReport {
         StringBuilder sb = new StringBuilder();
         String sumsSeparator = ", ";
 //        int sumsSize = sums.keySet().size();
-        for (Currency currency : sums.keySet()) {
+        for (CurrencyEnum currency : sums.keySet()) {
 //            sumsSize--;
             Double sum = sums.get(currency);
             if (!isSumEmpty(sum)) {
@@ -124,36 +124,36 @@ public class CategoryReport {
         return sb.toString();
     }
 
-    private Map<Currency, Double> getCategorySumsWithSubcategories() {
-        Map<Currency, Double> resultSums = getCategorySums(categoryOperations);
+    private Map<CurrencyEnum, Double> getCategorySumsWithSubcategories() {
+        Map<CurrencyEnum, Double> resultSums = getCategorySums(categoryOperations);
         if (MapUtils.isEmpty(resultSums)) {
             resultSums = createCurrencySumsMap();
         }
         for (CategoryReport categoryReport : subcategoryReports.values()) {
-            Map<Currency, Double> subcategorySums = getCategorySums(categoryReport.getCategoryOperations());
+            Map<CurrencyEnum, Double> subcategorySums = getCategorySums(categoryReport.getCategoryOperations());
             addSumsToResultSums(resultSums, subcategorySums);
         }
         return resultSums;
     }
 
-    private void removeEmptySums(Map<Currency, Double> resultSums) {
-        for (Currency currency : resultSums.keySet()) {
+    private void removeEmptySums(Map<CurrencyEnum, Double> resultSums) {
+        for (CurrencyEnum currency : resultSums.keySet()) {
             if (resultSums.get(currency) == 0) {
                 resultSums.remove(currency);
             }
         }
     }
 
-    private void addSumsToResultSums(Map<Currency, Double> resultSums, Map<Currency, Double> subcategorySums) {
-        for (Currency currency : subcategorySums.keySet()) {
+    private void addSumsToResultSums(Map<CurrencyEnum, Double> resultSums, Map<CurrencyEnum, Double> subcategorySums) {
+        for (CurrencyEnum currency : subcategorySums.keySet()) {
             resultSums.put(currency, resultSums.get(currency) + subcategorySums.get(currency));
         }
     }
 
-    public Map<Currency, Double> getCategorySums(Collection<CategoryOperation> categoryOperations) {
-        Map<Currency, Double> sums = createCurrencySumsMap();
+    public Map<CurrencyEnum, Double> getCategorySums(Collection<CategoryOperation> categoryOperations) {
+        Map<CurrencyEnum, Double> sums = createCurrencySumsMap();
         for (CategoryOperation operation : categoryOperations) {
-            Currency currency = operation.getSumWithCurrency().getCurrency();
+            CurrencyEnum currency = operation.getSumWithCurrency().getCurrency();
             Double currencySum =
                     sums.get(currency) + operation.getSumWithCurrency().getValue();
 
@@ -163,9 +163,9 @@ public class CategoryReport {
         return sums;
     }
 
-    private Map<Currency, Double> createCurrencySumsMap() {
-        Map<Currency, Double> sums = new EnumMap<Currency, Double>(Currency.class);
-        for (Currency currency : Currency.values()) {
+    private Map<CurrencyEnum, Double> createCurrencySumsMap() {
+        Map<CurrencyEnum, Double> sums = new EnumMap<CurrencyEnum, Double>(CurrencyEnum.class);
+        for (CurrencyEnum currency : CurrencyEnum.values()) {
             sums.put(currency, 0D);
         }
         return sums;

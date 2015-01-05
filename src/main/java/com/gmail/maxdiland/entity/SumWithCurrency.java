@@ -1,10 +1,10 @@
 package com.gmail.maxdiland.entity;
 
 public class SumWithCurrency {
-    private final Currency currency;
+    private final CurrencyEnum currency;
     private final float value;
 
-    public SumWithCurrency(Currency currency, float value) {
+    public SumWithCurrency(CurrencyEnum currency, float value) {
         this.currency = currency;
         this.value = value;
     }
@@ -18,7 +18,7 @@ public class SumWithCurrency {
         return String.format("%.2f%s", value, currency.getTextValue());
     }
 
-    public Currency getCurrency() {
+    public CurrencyEnum getCurrency() {
         return currency;
     }
 }

@@ -1,11 +1,12 @@
-package com.gmail.maxdiland.entity.report;
+package com.gmail.maxdiland.report;
 
+import com.gmail.maxdiland.entity.CurrencyEnum;
 import com.gmail.maxdiland.entity.SumWithCurrency;
 
 import java.util.*;
 
 public class CategoryCurrencySumReport implements Iterable<List<SumWithCurrency>> {
-    private EnumMap<com.gmail.maxdiland.entity.Currency, List<SumWithCurrency>> sums;
+    private EnumMap<CurrencyEnum, List<SumWithCurrency>> sums;
 
     public void addSumWithCurrency(SumWithCurrency sumWithCurrency) {
         checkMap();
@@ -21,14 +22,14 @@ public class CategoryCurrencySumReport implements Iterable<List<SumWithCurrency>
 
     private void checkMap() {
         if (sums == null) {
-            sums = new EnumMap<com.gmail.maxdiland.entity.Currency, List<SumWithCurrency>>(com.gmail.maxdiland.entity.Currency.class);
+            sums = new EnumMap<CurrencyEnum, List<SumWithCurrency>>(CurrencyEnum.class);
         }
     }
 
     @Override
     public Iterator<List<SumWithCurrency>> iterator() {
         return new Iterator<List<SumWithCurrency>>() {
-            private Iterator<com.gmail.maxdiland.entity.Currency> iterator = sums.keySet().iterator();
+            private Iterator<CurrencyEnum> iterator = sums.keySet().iterator();
 
             @Override
             public boolean hasNext() {

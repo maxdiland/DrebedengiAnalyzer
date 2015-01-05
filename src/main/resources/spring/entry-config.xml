@@ -20,24 +20,6 @@
         <ref bean="profitsPP" />
     </util:set>
 
-    <!--<util:set id="expenseCategories">-->
-        <!--<ref bean="noCategory" />-->
-        <!--<ref bean="foodCategory" />-->
-        <!--<ref bean="lifeOutlayCategory" />-->
-        <!--<ref bean="homeAndFamilyCategory" />-->
-        <!--<ref bean="healthAndBeautyCategory" />-->
-        <!--<ref bean="bicycleCategory" />-->
-        <!--<ref bean="electronicDevicesCategory" />-->
-    <!--</util:set>-->
-
-    <!--<util:set id="profitCategories">-->
-        <!--<ref bean="interestOnDeposits" />-->
-        <!--<ref bean="workOnRogaAndKopyta" />-->
-        <!--<ref bean="otherSources" />-->
-        <!--<ref bean="flatLeasing" />-->
-        <!--<ref bean="profitsPP" />-->
-    <!--</util:set>-->
-
     <util:set id="moneyPlaces">
         <ref bean="myWallet" />
         <ref bean="bufferZone" />

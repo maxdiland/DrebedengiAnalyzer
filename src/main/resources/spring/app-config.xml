@@ -12,26 +12,21 @@
         <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 
-    <!--<bean id="drebedengiAnalyzer" class="ru.mail.maxkr.analyzer.DrebedengiAnalyzer">-->
-        <!--<property name="converter" ref="financialOperationCreator" />-->
-        <!--<property name="csvReader" ref="csvReader" />-->
-        <!--<property name="categories" ref="categories" />-->
-        <!--<property name="moneyPlaces" ref="moneyPlaces" />-->
-    <!--</bean>-->
+    <bean id="userInputScanner" class="com.gmail.maxdiland.consolescanner.ExtendedScannerFactory"
+          factory-method="getRetriableExtendedScanner" />
 
     <bean id="dateFormat" class="java.text.SimpleDateFormat">
-        <constructor-arg index="0" value="yyyy-MM-dd HH:mm:ss" />
+        <constructor-arg index="0" value="${date.format}" />
     </bean>
 
-    <bean id="financialOperationCreator" class="com.gmail.maxdiland.mapper.FinancialOperationMapper"
+    <bean id="financialOperationMapper" class="com.gmail.maxdiland.mapper.FinancialOperationMapper"
           scope="prototype">
         <property name="dateFormat" ref="dateFormat" />
         <property name="entryManager" ref="entryManager" />
     </bean>
 
     <bean id="csvReader" class="com.gmail.maxdiland.csvreader.CSVReader">
-        <constructor-arg value="${csv.file.source}" />
-        <constructor-arg value="${csv.file.delimiter}" />
+        <property name="csvDelimiter" value="${csv.file.delimiter}" />
     </bean>
 
     <bean id="entryManager" class="com.gmail.maxdiland.entity.EntryManager">
